@@ -45,6 +45,7 @@ export const getUsersHandler = async (
 ): Promise<void> => {
   try {
     const users = await prisma.user.findMany({
+      orderBy: [{ updatedAt: 'desc' }],
       take: request.query.limit ?? 100,
       skip: request.query.offset ?? 0,
     });
