@@ -5,8 +5,8 @@ import swagger from '@fastify/swagger';
 import swaggerUI from '@fastify/swagger-ui';
 import fs from 'fs';
 import { withRefResolver } from 'fastify-zod';
-import { userSchemas } from '@/modules/user/user.schema';
-import userRoutes from '@/modules/user/user.route';
+import { userSchemas } from './modules/user/user.schema';
+import userRoutes from './modules/user/user.route';
 
 export const server = fastify({
   logger: true,
