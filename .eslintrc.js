@@ -21,16 +21,15 @@ module.exports = defineConfig({
     project: 'tsconfig.json',
   },
   rules: {
-    'import/extensions': [
-      2,
-      {
-        // js: 'never',
-        // jsx: 'never',
-        ts: 'never',
-        tsx: 'never',
-        json: 'always',
-      },
-    ],
+    // 'import/extensions': [
+    //   2,
+    //   {
+    //     // js: 'never',
+    //     ts: 'never',
+    //     tsx: 'never',
+    //     json: 'always',
+    //   },
+    // ],
   },
   overrides: [],
 });
