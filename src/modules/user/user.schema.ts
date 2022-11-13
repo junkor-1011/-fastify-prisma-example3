@@ -30,6 +30,11 @@ export const getUserParamsSchema = z.object({
 });
 export type GetUserParamsType = z.infer<typeof getUserParamsSchema>;
 
+export const deleteUserParamsSchema = z.object({
+  id: z.string().uuid().describe('id of the user'),
+});
+export type DeleteUserParamsType = z.infer<typeof deleteUserParamsSchema>;
+
 export const { schemas: userSchemas, $ref } = buildJsonSchemas(
   {
     userInputSchema,
@@ -37,6 +42,7 @@ export const { schemas: userSchemas, $ref } = buildJsonSchemas(
     userListSchema,
     getUsersQuerySchema,
     getUserParamsSchema,
+    deleteUserParamsSchema,
   },
   {
     $id: 'userSchemas',

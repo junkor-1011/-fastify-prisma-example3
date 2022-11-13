@@ -1,7 +1,12 @@
 /* eslint-disable @typescript-eslint/require-await */
 
 import { FastifyInstance } from 'fastify';
-import { createUserHandler, getUserHandler, getUsersHandler } from './user.controller';
+import {
+  createUserHandler,
+  deleteUserHandler,
+  getUserHandler,
+  getUsersHandler,
+} from './user.controller';
 import { $ref } from './user.schema';
 
 const userRoutes = async (server: FastifyInstance): Promise<void> => {
@@ -37,6 +42,19 @@ const userRoutes = async (server: FastifyInstance): Promise<void> => {
       tags: ['User'],
     },
     handler: getUserHandler,
+  });
+  server.delete('/:id', {
+    schema: {
+      params: $ref('deleteUserParamsSchema'),
+      response: {
+        200: {
+          ...$ref('userSchema'),
+          description: 'user detail',
+        },
+      },
+      tags: ['User'],
+    },
+    handler: deleteUserHandler,
   });
 };
 export default userRoutes;

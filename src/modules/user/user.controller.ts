@@ -77,3 +77,22 @@ export const getUsersHandler = async (
     });
   }
 };
+
+export const deleteUserHandler = async (
+  request: FastifyRequest<{ Params: GetUserParamsType }>,
+  reply: FastifyReply,
+): Promise<void> => {
+  try {
+    const user = await prisma.user.delete({
+      where: {
+        id: request.params.id,
+      },
+    });
+    await reply.code(200).send(user);
+  } catch (err) {
+    console.log(err);
+    await reply.code(500).send({
+      message: 'Internal Server Error',
+    });
+  }
+};

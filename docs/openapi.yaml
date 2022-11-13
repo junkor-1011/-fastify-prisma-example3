@@ -86,12 +86,23 @@ components:
           required:
             - id
           additionalProperties: false
+        deleteUserParamsSchema:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: id of the user
+          required:
+            - id
+          additionalProperties: false
       required:
         - userInputSchema
         - userSchema
         - userListSchema
         - getUsersQuerySchema
         - getUserParamsSchema
+        - deleteUserParamsSchema
       additionalProperties: false
 paths:
   /user/:
@@ -142,6 +153,25 @@ paths:
                 description: users
   "/user/{id}":
     get:
+      tags:
+        - User
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+          in: path
+          name: id
+          required: true
+          description: id of the user
+      responses:
+        "200":
+          description: user detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userSchemas/properties/userSchema"
+                description: user detail
+    delete:
       tags:
         - User
       parameters:
