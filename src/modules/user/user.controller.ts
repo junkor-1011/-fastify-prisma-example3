@@ -8,6 +8,8 @@ import {
   UserInputType,
   GetUsersQueryType,
   GetUserParamsType,
+  PutUserParamsType,
+  PutUserRequestBodyType,
   // UserType,
 } from './user.schema';
 
@@ -84,6 +86,39 @@ export const deleteUserHandler = async (
 ): Promise<void> => {
   try {
     const user = await prisma.user.delete({
+      where: {
+        id: request.params.id,
+      },
+    });
+    await reply.code(200).send(user);
+  } catch (err) {
+    console.log(err);
+    await reply.code(500).send({
+      message: 'Internal Server Error',
+    });
+  }
+};
+
+export const putUserHandler = async (
+  request: FastifyRequest<{ Params: PutUserParamsType; Body: PutUserRequestBodyType }>,
+  reply: FastifyReply,
+): Promise<void> => {
+  const data: { name?: string; email?: string; age?: number; updatedAt: Date } = {
+    updatedAt: new Date(),
+  };
+  const { name, email, age } = request.body;
+  if (name !== '') {
+    data.name = name;
+  }
+  if (email !== undefined) {
+    data.email = email;
+  }
+  if (age !== undefined) {
+    data.age = age;
+  }
+  try {
+    const user = await prisma.user.update({
+      data,
       where: {
         id: request.params.id,
       },

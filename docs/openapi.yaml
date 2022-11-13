@@ -86,6 +86,31 @@ components:
           required:
             - id
           additionalProperties: false
+        putUserParamsSchema:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: id of the user
+          required:
+            - id
+          additionalProperties: false
+        putUserRequestBodySchema:
+          type: object
+          properties:
+            name:
+              $ref: "#/components/schemas/userSchemas/properties/userInputSchema/properties/n\
+                ame"
+            email:
+              $ref: "#/components/schemas/userSchemas/properties/userInputSchema/properties/e\
+                mail"
+            age:
+              $ref: "#/components/schemas/userSchemas/properties/userInputSchema/properties/a\
+                ge"
+          required:
+            - name
+          additionalProperties: false
         deleteUserParamsSchema:
           type: object
           properties:
@@ -102,6 +127,8 @@ components:
         - userListSchema
         - getUsersQuerySchema
         - getUserParamsSchema
+        - putUserParamsSchema
+        - putUserRequestBodySchema
         - deleteUserParamsSchema
       additionalProperties: false
 paths:
@@ -174,6 +201,30 @@ paths:
     delete:
       tags:
         - User
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+          in: path
+          name: id
+          required: true
+          description: id of the user
+      responses:
+        "200":
+          description: user detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userSchemas/properties/userSchema"
+                description: user detail
+    put:
+      tags:
+        - User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/userSchemas/properties/putUserRequestBodySchema"
       parameters:
         - schema:
             type: string
