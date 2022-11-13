@@ -6,8 +6,8 @@ export const userBase = z.object({
   name: z.string().describe('user name'),
   email: z.string().email().optional().describe("user's email address"),
   age: z.number().min(0).max(120).step(1).optional().describe('the age of user'),
-  // createdAt: z.date().describe('signup date'),
-  // updatedAt: z.date().describe('last modified date'),
+  createdAt: z.date().describe('signup date'),
+  updatedAt: z.date().describe('last modified date'),
 });
 
 export const userInputSchema = userBase.pick({ name: true, email: true, age: true });

@@ -43,9 +43,19 @@ components:
             age:
               $ref: "#/components/schemas/userSchemas/properties/userInputSchema/properties/a\
                 ge"
+            createdAt:
+              type: string
+              format: date-time
+              description: signup date
+            updatedAt:
+              type: string
+              format: date-time
+              description: last modified date
           required:
             - id
             - name
+            - createdAt
+            - updatedAt
           additionalProperties: false
       required:
         - userInputSchema
