@@ -46,7 +46,9 @@ const main = async (): Promise<void> => {
     process.exit(1);
   }
 
-  const responseYaml = await server.inject('/docs/yaml');
-  fs.writeFileSync('docs/openapi.yaml', responseYaml.payload);
+  if (process.env.STAGE !== 'PRODUCTION') {
+    const responseYaml = await server.inject('/docs/yaml');
+    fs.writeFileSync('docs/openapi.yaml', responseYaml.payload);
+  }
 };
 main();
