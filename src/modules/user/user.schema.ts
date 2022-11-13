@@ -23,7 +23,12 @@ export const getUsersQuerySchema = z.object({
   limit: z.number().min(1).step(1).default(100).describe('limit').optional(),
   offset: z.number().min(0).step(1).describe('offset').optional(),
 });
-export type GetUsersQuerySchema = z.infer<typeof getUsersQuerySchema>;
+export type GetUsersQueryType = z.infer<typeof getUsersQuerySchema>;
+
+export const getUserParamsSchema = z.object({
+  id: z.string().uuid().describe('id of the user'),
+});
+export type GetUserParamsType = z.infer<typeof getUserParamsSchema>;
 
 export const { schemas: userSchemas, $ref } = buildJsonSchemas(
   {
@@ -31,6 +36,7 @@ export const { schemas: userSchemas, $ref } = buildJsonSchemas(
     userSchema,
     userListSchema,
     getUsersQuerySchema,
+    getUserParamsSchema,
   },
   {
     $id: 'userSchemas',

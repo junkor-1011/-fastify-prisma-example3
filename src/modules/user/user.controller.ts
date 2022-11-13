@@ -6,7 +6,8 @@ import {
   // userInputSchema,
   // userSchema,
   UserInputType,
-  GetUsersQuerySchema,
+  GetUsersQueryType,
+  GetUserParamsType,
   // UserType,
 } from './user.schema';
 
@@ -39,8 +40,27 @@ export const createUserHandler = async (
   await reply.code(201).send(record);
 };
 
+export const getUserHandler = async (
+  request: FastifyRequest<{ Params: GetUserParamsType }>,
+  reply: FastifyReply,
+): Promise<void> => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: request.params.id,
+      },
+    });
+    await reply.code(200).send(user);
+  } catch (err) {
+    console.log(err);
+    await reply.code(500).send({
+      message: 'Internal Server Error',
+    });
+  }
+};
+
 export const getUsersHandler = async (
-  request: FastifyRequest<{ Querystring: GetUsersQuerySchema }>,
+  request: FastifyRequest<{ Querystring: GetUsersQueryType }>,
   reply: FastifyReply,
 ): Promise<void> => {
   try {

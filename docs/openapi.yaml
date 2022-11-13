@@ -76,11 +76,22 @@ components:
               multipleOf: 1
               description: offset
           additionalProperties: false
+        getUserParamsSchema:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: id of the user
+          required:
+            - id
+          additionalProperties: false
       required:
         - userInputSchema
         - userSchema
         - userListSchema
         - getUsersQuerySchema
+        - getUserParamsSchema
       additionalProperties: false
 paths:
   /user/:
@@ -129,3 +140,23 @@ paths:
               schema:
                 $ref: "#/components/schemas/userSchemas/properties/userListSchema"
                 description: users
+  "/user/{id}":
+    get:
+      tags:
+        - User
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+          in: path
+          name: id
+          required: true
+          description: id of the user
+      responses:
+        "200":
+          description: user detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userSchemas/properties/userSchema"
+                description: user detail
