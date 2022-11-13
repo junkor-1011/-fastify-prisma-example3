@@ -6,6 +6,7 @@ import {
   // userInputSchema,
   // userSchema,
   UserInputType,
+  GetUsersQuerySchema,
   // UserType,
 } from './user.schema';
 
@@ -36,4 +37,22 @@ export const createUserHandler = async (
   }
 
   await reply.code(201).send(record);
+};
+
+export const getUsersHandler = async (
+  request: FastifyRequest<{ Querystring: GetUsersQuerySchema }>,
+  reply: FastifyReply,
+): Promise<void> => {
+  try {
+    const users = await prisma.user.findMany({
+      take: request.query.limit ?? 100,
+      skip: request.query.offset ?? 0,
+    });
+    await reply.code(200).send(users);
+  } catch (err) {
+    console.log(err);
+    await reply.code(500).send({
+      message: 'Internal Server Error',
+    });
+  }
 };

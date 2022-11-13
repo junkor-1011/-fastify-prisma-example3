@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/require-await */
 
 import { FastifyInstance } from 'fastify';
-import { createUserHandler } from './user.controller';
+import { createUserHandler, getUsersHandler } from './user.controller';
 import { $ref } from './user.schema';
 
 const userRoutes = async (server: FastifyInstance): Promise<void> => {
@@ -14,6 +14,16 @@ const userRoutes = async (server: FastifyInstance): Promise<void> => {
       tags: ['User'],
     },
     handler: createUserHandler,
+  });
+  server.get('/', {
+    schema: {
+      querystring: $ref('getUsersQuerySchema'),
+      response: {
+        200: { ...$ref('userListSchema'), description: 'users' },
+      },
+      tags: ['User'],
+    },
+    handler: getUsersHandler,
   });
 };
 export default userRoutes;

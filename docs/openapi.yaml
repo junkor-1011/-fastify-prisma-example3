@@ -57,9 +57,30 @@ components:
             - createdAt
             - updatedAt
           additionalProperties: false
+        userListSchema:
+          type: array
+          items:
+            $ref: "#/components/schemas/userSchemas/properties/userSchema"
+        getUsersQuerySchema:
+          type: object
+          properties:
+            limit:
+              type: number
+              minimum: 1
+              multipleOf: 1
+              default: 100
+              description: limit
+            offset:
+              type: number
+              minimum: 0
+              multipleOf: 1
+              description: offset
+          additionalProperties: false
       required:
         - userInputSchema
         - userSchema
+        - userListSchema
+        - getUsersQuerySchema
       additionalProperties: false
 paths:
   /user/:
@@ -79,3 +100,32 @@ paths:
               schema:
                 $ref: "#/components/schemas/userSchemas/properties/userSchema"
                 description: user was created
+    get:
+      tags:
+        - User
+      parameters:
+        - schema:
+            type: number
+            minimum: 1
+            multipleOf: 1
+            default: 100
+          in: query
+          name: limit
+          required: false
+          description: limit
+        - schema:
+            type: number
+            minimum: 0
+            multipleOf: 1
+          in: query
+          name: offset
+          required: false
+          description: offset
+      responses:
+        "200":
+          description: users
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userSchemas/properties/userListSchema"
+                description: users

@@ -16,10 +16,21 @@ export type UserInputType = z.infer<typeof userInputSchema>;
 export const userSchema = userBase;
 export type UserType = z.infer<typeof userSchema>;
 
+export const userListSchema = z.array(userBase);
+export type userListType = z.infer<typeof userListSchema>;
+
+export const getUsersQuerySchema = z.object({
+  limit: z.number().min(1).step(1).default(100).describe('limit').optional(),
+  offset: z.number().min(0).step(1).describe('offset').optional(),
+});
+export type GetUsersQuerySchema = z.infer<typeof getUsersQuerySchema>;
+
 export const { schemas: userSchemas, $ref } = buildJsonSchemas(
   {
     userInputSchema,
     userSchema,
+    userListSchema,
+    getUsersQuerySchema,
   },
   {
     $id: 'userSchemas',
