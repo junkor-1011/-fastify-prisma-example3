@@ -1,0 +1,81 @@
+openapi: 3.0.3
+info:
+  title: Fastify Example
+  description: fastify zod example
+  version: 0.0.1
+components:
+  schemas:
+    userSchemas:
+      type: object
+      properties:
+        userInputSchema:
+          type: object
+          properties:
+            name:
+              type: string
+              description: user name
+            email:
+              type: string
+              format: email
+              description: user's email address
+            age:
+              type: number
+              minimum: 0
+              maximum: 120
+              multipleOf: 1
+              description: the age of user
+          required:
+            - name
+          additionalProperties: false
+        userSchema:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: user id
+            name:
+              $ref: "#/components/schemas/userSchemas/properties/userInputSchema/properties/n\
+                ame"
+            email:
+              $ref: "#/components/schemas/userSchemas/properties/userInputSchema/properties/e\
+                mail"
+            age:
+              $ref: "#/components/schemas/userSchemas/properties/userInputSchema/properties/a\
+                ge"
+            createdAt:
+              type: string
+              format: date-time
+              description: signup date
+            updatedAt:
+              type: string
+              format: date-time
+              description: last modified date
+          required:
+            - id
+            - name
+            - createdAt
+            - updatedAt
+          additionalProperties: false
+      required:
+        - userInputSchema
+        - userSchema
+      additionalProperties: false
+paths:
+  /user/:
+    post:
+      tags:
+        - User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/userSchemas/properties/userInputSchema"
+      responses:
+        "201":
+          description: user was created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userSchemas/properties/userSchema"
+                description: user was created
