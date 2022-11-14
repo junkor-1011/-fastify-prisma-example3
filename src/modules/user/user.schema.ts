@@ -5,12 +5,13 @@ export const userBase = z.object({
   id: z.string().uuid().describe('user id'),
   name: z.string().describe('user name'),
   email: z.string().email().optional().describe("user's email address"),
-  age: z.number().min(0).max(120).step(1).optional().describe('the age of user'),
+  rank: z.number().min(1).max(10).step(1).default(1).optional().describe('the rank of user'),
+  birthdate: z.date().describe('bitrth day of the user'),
   createdAt: z.date().describe('signup date'),
   updatedAt: z.date().describe('last modified date'),
 });
 
-export const userInputSchema = userBase.pick({ name: true, email: true, age: true });
+export const userInputSchema = userBase.pick({ name: true, email: true, birthdate: true });
 export type UserInputType = z.infer<typeof userInputSchema>;
 
 export const userSchema = userBase;
@@ -43,7 +44,7 @@ export type PutUserParamsType = z.infer<typeof putUserParamsSchema>;
 export const putUserRequestBodySchema = userBase.pick({
   name: true,
   email: true,
-  age: true,
+  birthdate: true,
 });
 export type PutUserRequestBodyType = z.infer<typeof putUserRequestBodySchema>;
 

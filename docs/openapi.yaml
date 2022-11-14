@@ -18,14 +18,13 @@ components:
               type: string
               format: email
               description: user's email address
-            age:
-              type: number
-              minimum: 0
-              maximum: 120
-              multipleOf: 1
-              description: the age of user
+            birthdate:
+              type: string
+              format: date-time
+              description: bitrth day of the user
           required:
             - name
+            - birthdate
           additionalProperties: false
         userSchema:
           type: object
@@ -40,9 +39,16 @@ components:
             email:
               $ref: "#/components/schemas/userSchemas/properties/userInputSchema/properties/e\
                 mail"
-            age:
-              $ref: "#/components/schemas/userSchemas/properties/userInputSchema/properties/a\
-                ge"
+            rank:
+              type: number
+              minimum: 1
+              maximum: 10
+              multipleOf: 1
+              default: 1
+              description: the rank of user
+            birthdate:
+              $ref: "#/components/schemas/userSchemas/properties/userInputSchema/properties/b\
+                irthdate"
             createdAt:
               type: string
               format: date-time
@@ -54,6 +60,7 @@ components:
           required:
             - id
             - name
+            - birthdate
             - createdAt
             - updatedAt
           additionalProperties: false
@@ -105,11 +112,12 @@ components:
             email:
               $ref: "#/components/schemas/userSchemas/properties/userInputSchema/properties/e\
                 mail"
-            age:
-              $ref: "#/components/schemas/userSchemas/properties/userInputSchema/properties/a\
-                ge"
+            birthdate:
+              $ref: "#/components/schemas/userSchemas/properties/userInputSchema/properties/b\
+                irthdate"
           required:
             - name
+            - birthdate
           additionalProperties: false
         deleteUserParamsSchema:
           type: object

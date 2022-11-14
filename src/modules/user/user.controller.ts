@@ -24,7 +24,8 @@ export const createUserHandler = async (
     id,
     name: request.body.name,
     email: request.body?.email,
-    age: request.body?.age,
+    birthdate: request.body?.birthdate,
+    rank: 1,
     createdAt: date,
     updatedAt: date,
   };
@@ -103,18 +104,18 @@ export const putUserHandler = async (
   request: FastifyRequest<{ Params: PutUserParamsType; Body: PutUserRequestBodyType }>,
   reply: FastifyReply,
 ): Promise<void> => {
-  const data: { name?: string; email?: string; age?: number; updatedAt: Date } = {
+  const data: { name?: string; email?: string; birthdate?: Date; updatedAt: Date } = {
     updatedAt: new Date(),
   };
-  const { name, email, age } = request.body;
+  const { name, email, birthdate } = request.body;
   if (name !== '') {
     data.name = name;
   }
   if (email !== undefined) {
     data.email = email;
   }
-  if (age !== undefined) {
-    data.age = age;
+  if (birthdate !== undefined) {
+    data.birthdate = birthdate;
   }
   try {
     const user = await prisma.user.update({
