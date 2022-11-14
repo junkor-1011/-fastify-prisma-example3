@@ -10,6 +10,8 @@ import {
   GetUserParamsType,
   PatchUserParamsType,
   PatchUserRequestBodyType,
+  PutUserParamsType,
+  PutUserRequestBodyType,
   // UserType,
 } from './user.schema';
 
@@ -122,6 +124,43 @@ export const patchUserHandler = async (
       data,
       where: {
         id: request.params.id,
+      },
+    });
+    await reply.code(200).send(user);
+  } catch (err) {
+    console.log(err);
+    await reply.code(500).send({
+      message: 'Internal Server Error',
+    });
+  }
+};
+
+export const putUserHandler = async (
+  request: FastifyRequest<{ Params: PutUserParamsType; Body: PutUserRequestBodyType }>,
+  reply: FastifyReply,
+): Promise<void> => {
+  const { id } = request.params;
+  const { name, email, birthdate, rank } = request.body;
+  const date = new Date();
+  const data = {
+    name,
+    email,
+    birthdate,
+    rank,
+    updatedAt: date,
+  };
+  try {
+    const user = await prisma.user.upsert({
+      where: {
+        id: request.params.id,
+      },
+      update: {
+        ...data,
+      },
+      create: {
+        id,
+        ...data,
+        createdAt: date,
       },
     });
     await reply.code(200).send(user);

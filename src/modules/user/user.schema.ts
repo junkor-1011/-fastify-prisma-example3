@@ -5,7 +5,7 @@ export const userBase = z.object({
   id: z.string().uuid().describe('user id'),
   name: z.string().describe('user name'),
   email: z.string().email().optional().describe("user's email address"),
-  rank: z.number().min(1).max(10).step(1).default(1).optional().describe('the rank of user'),
+  rank: z.number().min(1).max(10).step(1).default(1).describe('the rank of user'),
   birthdate: z.date().describe('bitrth day of the user'),
   createdAt: z.date().describe('signup date'),
   updatedAt: z.date().describe('last modified date'),
@@ -50,6 +50,19 @@ export const patchUserRequestBodySchema = userBase
   .partial();
 export type PatchUserRequestBodyType = z.infer<typeof patchUserRequestBodySchema>;
 
+export const putUserParamsSchema = z.object({
+  id: z.string().uuid().describe('id of the user'),
+});
+export type PutUserParamsType = z.infer<typeof putUserParamsSchema>;
+
+export const putUserRequestBodySchema = userBase.pick({
+  name: true,
+  email: true,
+  birthdate: true,
+  rank: true,
+});
+export type PutUserRequestBodyType = z.infer<typeof putUserRequestBodySchema>;
+
 export const { schemas: userSchemas, $ref } = buildJsonSchemas(
   {
     userInputSchema,
@@ -57,6 +70,8 @@ export const { schemas: userSchemas, $ref } = buildJsonSchemas(
     userListSchema,
     getUsersQuerySchema,
     getUserParamsSchema,
+    putUserParamsSchema,
+    putUserRequestBodySchema,
     patchUserParamsSchema,
     patchUserRequestBodySchema,
     deleteUserParamsSchema,

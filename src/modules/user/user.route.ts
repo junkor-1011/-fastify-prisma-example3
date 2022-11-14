@@ -7,6 +7,7 @@ import {
   getUserHandler,
   getUsersHandler,
   patchUserHandler,
+  putUserHandler,
 } from './user.controller';
 import { $ref } from './user.schema';
 
@@ -70,6 +71,20 @@ const userRoutes = async (server: FastifyInstance): Promise<void> => {
       tags: ['User'],
     },
     handler: patchUserHandler,
+  });
+  server.put('/:id', {
+    schema: {
+      params: $ref('putUserParamsSchema'),
+      body: $ref('putUserRequestBodySchema'),
+      response: {
+        200: {
+          ...$ref('userSchema'),
+          description: 'user detail',
+        },
+      },
+      tags: ['User'],
+    },
+    handler: putUserHandler,
   });
 };
 export default userRoutes;
