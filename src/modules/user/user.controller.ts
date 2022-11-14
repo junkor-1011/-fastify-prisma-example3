@@ -8,8 +8,8 @@ import {
   UserInputType,
   GetUsersQueryType,
   GetUserParamsType,
-  PutUserParamsType,
-  PutUserRequestBodyType,
+  PatchUserParamsType,
+  PatchUserRequestBodyType,
   // UserType,
 } from './user.schema';
 
@@ -100,22 +100,22 @@ export const deleteUserHandler = async (
   }
 };
 
-export const putUserHandler = async (
-  request: FastifyRequest<{ Params: PutUserParamsType; Body: PutUserRequestBodyType }>,
+export const patchUserHandler = async (
+  request: FastifyRequest<{ Params: PatchUserParamsType; Body: PatchUserRequestBodyType }>,
   reply: FastifyReply,
 ): Promise<void> => {
-  const data: { name?: string; email?: string; birthdate?: Date; updatedAt: Date } = {
+  const data: { name?: string; email?: string; rank?: number; updatedAt: Date } = {
     updatedAt: new Date(),
   };
-  const { name, email, birthdate } = request.body;
+  const { name, email, rank } = request.body;
   if (name !== '') {
     data.name = name;
   }
   if (email !== undefined) {
     data.email = email;
   }
-  if (birthdate !== undefined) {
-    data.birthdate = birthdate;
+  if (rank !== undefined) {
+    data.rank = rank;
   }
   try {
     const user = await prisma.user.update({

@@ -36,17 +36,19 @@ export const deleteUserParamsSchema = z.object({
 });
 export type DeleteUserParamsType = z.infer<typeof deleteUserParamsSchema>;
 
-export const putUserParamsSchema = z.object({
+export const patchUserParamsSchema = z.object({
   id: z.string().uuid().describe('id of the user'),
 });
-export type PutUserParamsType = z.infer<typeof putUserParamsSchema>;
+export type PatchUserParamsType = z.infer<typeof patchUserParamsSchema>;
 
-export const putUserRequestBodySchema = userBase.pick({
-  name: true,
-  email: true,
-  birthdate: true,
-});
-export type PutUserRequestBodyType = z.infer<typeof putUserRequestBodySchema>;
+export const patchUserRequestBodySchema = userBase
+  .pick({
+    name: true,
+    email: true,
+    rank: true,
+  })
+  .partial();
+export type PatchUserRequestBodyType = z.infer<typeof patchUserRequestBodySchema>;
 
 export const { schemas: userSchemas, $ref } = buildJsonSchemas(
   {
@@ -55,8 +57,8 @@ export const { schemas: userSchemas, $ref } = buildJsonSchemas(
     userListSchema,
     getUsersQuerySchema,
     getUserParamsSchema,
-    putUserParamsSchema,
-    putUserRequestBodySchema,
+    patchUserParamsSchema,
+    patchUserRequestBodySchema,
     deleteUserParamsSchema,
   },
   {
