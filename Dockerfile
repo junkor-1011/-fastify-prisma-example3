@@ -13,20 +13,18 @@ RUN pnpm install --ignore-scripts && \
     pnpm prisma generate && \
     pnpm build && \
     cp "node_modules/.pnpm/prisma@4.6.1/node_modules/prisma/libquery_engine-debian-openssl-1.1.x.so.node" dist/ && \
-    cp "node_modules/.pnpm/prisma@4.6.1/node_modules/prisma/libquery_engine-debian-openssl-3.0.x.so.node" dist/ && \
     pnpm install -P --ignore-scripts
     # pnpm install --production --ignore-scripts && \
     # pnpm cache clean
 
 FROM node:18-bullseye-slim as base
 
-# ENV TINI_VERSION 0.19.0
+ENV TINI_VERSION 0.19.0-1
 # ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/bin/tini
 # RUN chmod +x /usr/bin/tini
 RUN apt-get update && \
     apt-get -qq install -y --no-install-recommends \
-    # tini=${TINI_VERSION} && \
-    tini && \
+    tini=${TINI_VERSION} && \
     rm -rf /var/lib/apt/lists/*
 EXPOSE 3000
 
