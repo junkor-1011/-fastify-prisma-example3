@@ -29,10 +29,12 @@ const main = async (): Promise<void> => {
     }),
   );
 
-  server.register(swaggerUI, {
-    routePrefix: '/docs',
-    staticCSP: true,
-  });
+  if (process.env.STAGE !== 'PRODUCTION') {
+    server.register(swaggerUI, {
+      routePrefix: '/docs',
+      staticCSP: true,
+    });
+  }
 
   server.register(userRoutes, {
     prefix: '/user',
