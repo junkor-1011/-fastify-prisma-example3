@@ -22,7 +22,7 @@
   "devDependencies": {
     "@types/node": "^18.11.9",
     "@types/uuid": "^8.3.4",
-    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
     "esbuild": "^0.15.14",
     "esbuild-jest": "^0.5.0",
     "eslint": "^8.27.0",
@@ -40,13 +40,13 @@
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.1.0",
     "tsx": "^3.12.1",
-    "typescript": "*"
+    "typescript": "~4.8.4"
   },
   "dependencies": {
     "@fastify/swagger": "^8.1.0",
     "@fastify/swagger-ui": "^1.2.0",
     "@prisma/client": "^4.6.1",
-    "fastify": "^4.9.2",
+    "fastify": "^4.10.0",
     "fastify-zod": "^1.2.0",
     "uuid": "^9.0.0",
     "zod": "^3.19.1"
