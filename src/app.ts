@@ -37,7 +37,7 @@ const main = async (): Promise<void> => {
   }
 
   server.register(userRoutes, {
-    prefix: '/user',
+    prefix: '/users',
   });
 
   try {

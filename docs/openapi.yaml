@@ -166,7 +166,7 @@ components:
         - deleteUserParamsSchema
       additionalProperties: false
 paths:
-  /user/:
+  /users/:
     post:
       tags:
         - User
@@ -212,7 +212,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/userSchemas/properties/userListSchema"
                 description: users
-  "/user/{id}":
+  "/users/{id}":
     get:
       tags:
         - User
