@@ -12,7 +12,7 @@ RUN find -type f -regextype sed -regex ".*\.\(test\|spec\|stories\)\.\(ts\|tsx\)
 RUN pnpm install --frozen-lockfile --ignore-scripts && \
     pnpm prisma generate && \
     pnpm build && \
-    cp "node_modules/.pnpm/prisma@4.6.1/node_modules/prisma/libquery_engine-debian-openssl-1.1.x.so.node" dist/ && \
+    cp "node_modules/.pnpm/prisma@4.7.1/node_modules/prisma/libquery_engine-debian-openssl-1.1.x.so.node" dist/ && \
     pnpm install -P --frozen-lockfile --ignore-scripts
     # pnpm install --production --ignore-scripts && \
     # pnpm cache clean
