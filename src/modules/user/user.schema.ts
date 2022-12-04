@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { buildJsonSchemas } from 'fastify-zod';
 
+import { bindExamples } from '@/libs/openapiSpec';
+
 export const userBase = z.object({
   id: z.string().uuid().describe('user id'),
   name: z.string().describe('user name'),
@@ -13,9 +15,23 @@ export const userBase = z.object({
 
 export const userInputSchema = userBase.pick({ name: true, email: true, birthdate: true });
 export type UserInputType = z.infer<typeof userInputSchema>;
+const userInputSchemaExample: UserInputType = {
+  name: 'test-user',
+  email: 'test-user@example.com',
+  birthdate: new Date('2022-12-01T12:00:00.000Z'),
+};
 
 export const userSchema = userBase;
 export type UserType = z.infer<typeof userSchema>;
+const userSchemaExample: UserType = {
+  id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+  name: 'test-user',
+  email: 'test-user@example.com',
+  rank: 10,
+  birthdate: new Date('2022-12-01T12:00:00.000Z'),
+  createdAt: new Date('2022-12-01T12:00:00.000Z'),
+  updatedAt: new Date('2022-12-01T12:00:00.000Z'),
+};
 
 export const userListSchema = z.array(userBase);
 export type userListType = z.infer<typeof userListSchema>;
@@ -80,3 +96,10 @@ export const { schemas: userSchemas, $ref } = buildJsonSchemas(
     $id: 'userSchemas',
   },
 );
+
+const schemaExamples = {
+  userInputSchemaExample,
+  userSchemaExample,
+};
+
+bindExamples(userSchemas, schemaExamples);

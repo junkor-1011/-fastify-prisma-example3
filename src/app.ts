@@ -10,6 +10,12 @@ import userRoutes from '@/modules/user/user.route';
 
 export const server = fastify({
   logger: true,
+  ajv: {
+    customOptions: {
+      strict: 'log',
+      keywords: ['example'],
+    },
+  },
 });
 
 const main = async (): Promise<void> => {
