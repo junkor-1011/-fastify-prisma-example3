@@ -17,7 +17,7 @@
     "test": "pnpm unit",
     "lint": "eslint --ext .ts src/",
     "lint:fix": "eslint --fix --ext .ts src/",
-    "format": "prettier --write .",
+    "format": "prettier --write src ./*.{js,json,yaml,yml,md}",
     "prepare": "husky install"
   },
   "keywords": [],
