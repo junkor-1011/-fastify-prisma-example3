@@ -79,7 +79,34 @@ components:
         userListSchema:
           type: array
           items:
-            $ref: "#/components/schemas/userSchemas/properties/userSchema"
+            type: object
+            properties:
+              id:
+                $ref: "#/components/schemas/userSchemas/properties/userSchema/properties/id"
+              name:
+                $ref: "#/components/schemas/userSchemas/properties/userInputSchema/properties/n\
+                  ame"
+              email:
+                $ref: "#/components/schemas/userSchemas/properties/userInputSchema/properties/e\
+                  mail"
+              rank:
+                $ref: "#/components/schemas/userSchemas/properties/userSchema/properties/rank"
+              birthdate:
+                $ref: "#/components/schemas/userSchemas/properties/userInputSchema/properties/b\
+                  irthdate"
+              createdAt:
+                $ref: "#/components/schemas/userSchemas/properties/userSchema/properties/create\
+                  dAt"
+              updatedAt:
+                $ref: "#/components/schemas/userSchemas/properties/userSchema/properties/update\
+                  dAt"
+            required:
+              - id
+              - name
+              - birthdate
+              - createdAt
+              - updatedAt
+            additionalProperties: false
         getUsersQuerySchema:
           type: object
           properties:
@@ -99,9 +126,7 @@ components:
           type: object
           properties:
             id:
-              type: string
-              format: uuid
-              description: id of the user
+              $ref: "#/components/schemas/userSchemas/properties/userSchema/properties/id"
           required:
             - id
           additionalProperties: false
@@ -137,9 +162,7 @@ components:
           type: object
           properties:
             id:
-              type: string
-              format: uuid
-              description: id of the user
+              $ref: "#/components/schemas/userSchemas/properties/userSchema/properties/id"
           required:
             - id
           additionalProperties: false
@@ -159,9 +182,7 @@ components:
           type: object
           properties:
             id:
-              type: string
-              format: uuid
-              description: id of the user
+              $ref: "#/components/schemas/userSchemas/properties/userSchema/properties/id"
           required:
             - id
           additionalProperties: false
@@ -230,12 +251,10 @@ paths:
         - User
       parameters:
         - schema:
-            type: string
-            format: uuid
+            $ref: "#/components/schemas/userSchemas/properties/userSchema/properties/id"
           in: path
           name: id
           required: true
-          description: id of the user
       responses:
         "200":
           description: user detail
@@ -249,12 +268,10 @@ paths:
         - User
       parameters:
         - schema:
-            type: string
-            format: uuid
+            $ref: "#/components/schemas/userSchemas/properties/userSchema/properties/id"
           in: path
           name: id
           required: true
-          description: id of the user
       responses:
         "200":
           description: user detail
@@ -273,12 +290,10 @@ paths:
               $ref: "#/components/schemas/userSchemas/properties/patchUserRequestBodySchema"
       parameters:
         - schema:
-            type: string
-            format: uuid
+            $ref: "#/components/schemas/userSchemas/properties/userSchema/properties/id"
           in: path
           name: id
           required: true
-          description: id of the user
       responses:
         "200":
           description: user detail

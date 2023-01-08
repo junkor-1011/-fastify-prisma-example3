@@ -2,8 +2,12 @@ import { z } from 'zod';
 import { buildJsonSchemas } from 'fastify-zod';
 
 import { bindExamples } from '@/libs/openapiSpec';
+import {
+  // pickObject,
+  omitObject,
+} from '@/libs/utils/object';
 
-export const userBase = z.object({
+export const userBase = {
   id: z.string().uuid().describe('user id'),
   name: z.string().describe('user name'),
   email: z.string().email().optional().describe("user's email address"),
@@ -11,9 +15,11 @@ export const userBase = z.object({
   birthdate: z.date().describe('bitrth day of the user'),
   createdAt: z.date().describe('signup date'),
   updatedAt: z.date().describe('last modified date'),
-});
+};
 
-export const userInputSchema = userBase.pick({ name: true, email: true, birthdate: true });
+export const userInputSchema = z.object(
+  omitObject(userBase, ['id', 'rank', 'createdAt', 'updatedAt']),
+);
 export type UserInputType = z.infer<typeof userInputSchema>;
 const userInputSchemaExample: UserInputType = {
   name: 'test-user',
@@ -21,7 +27,7 @@ const userInputSchemaExample: UserInputType = {
   birthdate: new Date('2022-12-01T12:00:00.000Z'),
 };
 
-export const userSchema = userBase;
+export const userSchema = z.object({ ...userBase });
 export type UserType = z.infer<typeof userSchema>;
 const userSchemaExample: UserType = {
   id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
@@ -33,7 +39,7 @@ const userSchemaExample: UserType = {
   updatedAt: new Date('2022-12-01T12:00:00.000Z'),
 };
 
-export const userListSchema = z.array(userBase);
+export const userListSchema = z.array(z.object({ ...userBase }));
 export type userListType = z.infer<typeof userListSchema>;
 
 export const getUsersQuerySchema = z.object({
@@ -43,25 +49,25 @@ export const getUsersQuerySchema = z.object({
 export type GetUsersQueryType = z.infer<typeof getUsersQuerySchema>;
 
 export const getUserParamsSchema = z.object({
-  id: z.string().uuid().describe('id of the user'),
+  id: userBase.id,
 });
 export type GetUserParamsType = z.infer<typeof getUserParamsSchema>;
 
 export const deleteUserParamsSchema = z.object({
-  id: z.string().uuid().describe('id of the user'),
+  id: userBase.id,
 });
 export type DeleteUserParamsType = z.infer<typeof deleteUserParamsSchema>;
 
 export const patchUserParamsSchema = z.object({
-  id: z.string().uuid().describe('id of the user'),
+  id: userBase.id,
 });
 export type PatchUserParamsType = z.infer<typeof patchUserParamsSchema>;
 
-export const patchUserRequestBodySchema = userBase
-  .pick({
-    name: true,
-    email: true,
-    rank: true,
+export const patchUserRequestBodySchema = z
+  .object({
+    name: userBase.name,
+    email: userBase.email,
+    rank: userBase.rank,
   })
   .partial();
 export type PatchUserRequestBodyType = z.infer<typeof patchUserRequestBodySchema>;
@@ -71,11 +77,11 @@ export const putUserParamsSchema = z.object({
 });
 export type PutUserParamsType = z.infer<typeof putUserParamsSchema>;
 
-export const putUserRequestBodySchema = userBase.pick({
-  name: true,
-  email: true,
-  birthdate: true,
-  rank: true,
+export const putUserRequestBodySchema = z.object({
+  name: userBase.name,
+  email: userBase.email,
+  birthdate: userBase.birthdate,
+  rank: userBase.rank,
 });
 export type PutUserRequestBodyType = z.infer<typeof putUserRequestBodySchema>;
 
