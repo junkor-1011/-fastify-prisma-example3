@@ -49,9 +49,9 @@ const userRoutes = async (server: FastifyInstance): Promise<void> => {
     schema: {
       params: $ref('deleteUserParamsSchema'),
       response: {
-        200: {
-          ...$ref('userSchema'),
-          description: 'user detail',
+        204: {
+          type: 'null',
+          description: 'deleted user successfully',
         },
       },
       tags: ['User'],

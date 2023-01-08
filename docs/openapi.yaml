@@ -273,13 +273,8 @@ paths:
           name: id
           required: true
       responses:
-        "200":
-          description: user detail
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/userSchemas/properties/userSchema"
-                description: user detail
+        "204":
+          description: deleted user successfully
     patch:
       tags:
         - User

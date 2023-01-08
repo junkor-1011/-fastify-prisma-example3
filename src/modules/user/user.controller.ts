@@ -93,7 +93,8 @@ export const deleteUserHandler = async (
         id: request.params.id,
       },
     });
-    await reply.code(200).send(user);
+    console.log('[INFO]user deleted: ', user);
+    await reply.code(204).send();
   } catch (err) {
     console.log(err);
     await reply.code(500).send({
