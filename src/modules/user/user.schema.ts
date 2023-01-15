@@ -2,10 +2,7 @@ import { z } from 'zod';
 import { buildJsonSchemas } from 'fastify-zod';
 
 import { bindExamples } from '@/libs/openapiSpec';
-import {
-  // pickObject,
-  omitObject,
-} from '@/libs/utils/object';
+import { pickObject, omitObject } from '@/libs/utils/object';
 
 export const userBase = {
   id: z.string().uuid().describe('user id'),
@@ -63,13 +60,10 @@ export const patchUserParamsSchema = z.object({
 });
 export type PatchUserParamsType = z.infer<typeof patchUserParamsSchema>;
 
-export const patchUserRequestBodySchema = z
-  .object({
-    name: userBase.name,
-    email: userBase.email,
-    rank: userBase.rank,
-  })
-  .partial();
+export const patchUserRequestBodySchema = (() => {
+  const picked = pickObject(userBase, ['name', 'email', 'rank']);
+  return z.object(picked).partial();
+})();
 export type PatchUserRequestBodyType = z.infer<typeof patchUserRequestBodySchema>;
 
 export const putUserParamsSchema = z.object({
@@ -77,12 +71,10 @@ export const putUserParamsSchema = z.object({
 });
 export type PutUserParamsType = z.infer<typeof putUserParamsSchema>;
 
-export const putUserRequestBodySchema = z.object({
-  name: userBase.name,
-  email: userBase.email,
-  birthdate: userBase.birthdate,
-  rank: userBase.rank,
-});
+export const putUserRequestBodySchema = (() => {
+  const picked = pickObject(userBase, ['name', 'email', 'birthdate', 'rank']);
+  return z.object(picked);
+})();
 export type PutUserRequestBodyType = z.infer<typeof putUserRequestBodySchema>;
 
 export const { schemas: userSchemas, $ref } = buildJsonSchemas(
