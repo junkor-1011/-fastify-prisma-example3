@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
-  "packageManager": "pnpm@7.22.0",
+  "packageManager": "pnpm@7.25.0",
   "scripts": {
     "build": "esbuild src/app.ts --outdir=dist --platform=node --minify --bundle --tsconfig=tsconfig-prod.json",
     "dev:tsnd": "tsnd --respawn --transpile-only --exit-child -r tsconfig-paths/register --project tsconfig-dev.json src/app.ts",
@@ -18,6 +18,7 @@
     "lint": "eslint --ext .ts src/",
     "lint:fix": "eslint --fix --ext .ts src/",
     "format": "prettier --write src ./*.{js,json,yaml,yml,md}",
+    "dependency-graph": "depcruise src --include-only \"^src\" --config --output-type mermaid > docs/dependency-graph.md",
     "prepare": "husky install"
   },
   "keywords": [],
@@ -28,6 +29,7 @@
     "@types/node": "^18.11.18",
     "@types/uuid": "^9.0.0",
     "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "dependency-cruiser": "^12.4.0",
     "esbuild": "^0.17.0",
     "esbuild-jest": "^0.5.0",
     "eslint": "^8.32.0",
