@@ -23,7 +23,7 @@ model User {
   email     String?  @unique
   rank      Int
   birthdate DateTime
-  createdAt DateTime
-  updatedAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
