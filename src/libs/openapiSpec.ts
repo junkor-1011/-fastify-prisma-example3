@@ -1,20 +1,19 @@
 import { JsonSchema } from 'fastify-zod';
 
 export type JsonSchemaExtended = JsonSchema & {
-  properties?: {
-    [key: string]: {
+  properties?: Record<
+    string,
+    {
       type: string;
-      properties: {
-        [key: string]: object;
-      };
+      properties: Record<string, object>;
       example: object;
-    };
-  };
+    }
+  >;
 };
 
 export const bindExamples = (
   schemas: JsonSchemaExtended[],
-  examples: { [id: string]: object },
+  examples: Record<string, object>,
 ): void => {
   if (schemas.length === 0) return;
 
