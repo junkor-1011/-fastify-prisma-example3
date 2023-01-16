@@ -33,12 +33,16 @@ const userTestData = [
 
 beforeEach(async() => {
   jest.useRealTimers(); // to avoid fastify.inject stopping
-  await prisma.user.deleteMany();
-  await prisma.user.createMany({ data: userTestData });
+  await prisma.$transaction([
+    prisma.user.deleteMany(),
+    prisma.user.createMany({ data: userTestData }),
+  ])
 }, 5000)
 
 afterEach(async() => {
-  await prisma.user.deleteMany();
+  await prisma.$transaction([
+    prisma.user.deleteMany(),
+  ])
 }, 5000)
 
 describe('GET /users', () => {
@@ -50,5 +54,5 @@ describe('GET /users', () => {
     expect(response.statusCode).toBe(200)
     // check record
     expect(response.json()).toEqual(userTestData)
-  })
+  }, 5000)
 })
