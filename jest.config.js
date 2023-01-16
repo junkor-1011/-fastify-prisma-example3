@@ -1,11 +1,11 @@
 module.exports = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   // preset: 'ts-jest/presets/default-esm',
-  globals: {
-    '@swc/jest': {
-      tsconfig: '<rootDir>/tsconfig.json',
-    },
-  },
+  // globals: {
+  //   '@swc/jest': {
+  //     tsconfig: '<rootDir>/tsconfig.json',
+  //   },
+  // },
   globalSetup: './jest.global-setup.js',
   moduleFileExtensions: ['js', 'ts', 'json'],
   moduleNameMapper: {
