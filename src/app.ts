@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
-
-import fastify from 'fastify';
+import fastify, { FastifyInstance, FastifyServerOptions } from 'fastify';
 import swagger from '@fastify/swagger';
 import swaggerUI from '@fastify/swagger-ui';
 import fs from 'fs';
@@ -8,21 +6,21 @@ import { withRefResolver } from 'fastify-zod';
 import { userSchemas } from '@/modules/user/user.schema';
 import userRoutes from '@/modules/user/user.route';
 
-export const server = fastify({
-  logger: true,
-  ajv: {
-    customOptions: {
-      strict: 'log',
-      keywords: ['example'],
+export const buildApp = async (opts: FastifyServerOptions = {}): Promise<FastifyInstance> => {
+  const server = fastify({
+    logger: true,
+    ajv: {
+      customOptions: {
+        strict: 'log',
+        keywords: ['example'],
+      },
     },
-  },
-});
-
-const main = async (): Promise<void> => {
+    ...opts,
+  });
   userSchemas.forEach((schema) => {
     server.addSchema(schema);
   });
-  server.register(
+  await server.register(
     swagger,
     withRefResolver({
       openapi: {
@@ -35,16 +33,23 @@ const main = async (): Promise<void> => {
     }),
   );
 
-  if (process.env.STAGE !== 'PRODUCTION') {
-    server.register(swaggerUI, {
+  await server.register(userRoutes, {
+    prefix: '/users',
+  });
+
+  return await server;
+};
+
+export const app = async (): Promise<void> => {
+  const server = await buildApp();
+
+  const swaggerFlg: boolean = process.env.STAGE !== 'PRODUCTION';
+  if (swaggerFlg) {
+    await server.register(swaggerUI, {
       routePrefix: '/docs',
       staticCSP: true,
     });
   }
-
-  server.register(userRoutes, {
-    prefix: '/users',
-  });
 
   try {
     await server.listen({ port: 3000, host: '0.0.0.0' });
@@ -54,9 +59,8 @@ const main = async (): Promise<void> => {
     process.exit(1);
   }
 
-  if (process.env.STAGE !== 'PRODUCTION') {
+  if (swaggerFlg) {
     const responseYaml = await server.inject('/docs/yaml');
     fs.writeFileSync('docs/openapi.yaml', responseYaml.payload);
   }
 };
-main();
