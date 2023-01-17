@@ -18,6 +18,7 @@ C["object.test.ts"]
 end
 B["prisma.ts"]
 end
+D["main.ts"]
 end
 1-->4
 1-->6
@@ -28,4 +29,5 @@ end
 6-->8
 6-->A
 C-->A
+D-->1
 ```
