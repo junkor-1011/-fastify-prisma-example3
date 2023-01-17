@@ -1,5 +1,9 @@
+import { PrismaClient } from '@prisma/client';
 import { buildApp } from '@/app';
-import { prisma } from '@/libs/prisma';
+
+const prisma = new PrismaClient({
+  log: ['warn', 'error'],
+});
 
 const userTestData = [
   {
@@ -31,12 +35,18 @@ const userTestData = [
   },
 ];
 
+beforeAll(async () => {
+  jest.useRealTimers();
+  await prisma.$transaction([prisma.user.deleteMany()]);
+});
+
+afterAll(async () => {
+  await prisma.$disconnect();
+});
+
 beforeEach(async () => {
   jest.useRealTimers(); // to avoid fastify.inject stopping
-  await prisma.$transaction([
-    prisma.user.deleteMany(),
-    prisma.user.createMany({ data: userTestData }),
-  ]);
+  await prisma.$transaction([prisma.user.createMany({ data: userTestData })]);
 }, 5000);
 
 afterEach(async () => {
