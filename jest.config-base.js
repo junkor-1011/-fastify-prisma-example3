@@ -43,6 +43,7 @@ const config = {
     '/node_modules/',
     // '^.+\\.module\\.(css|sass|scss)$',
   ],
+  verbose: true,
 };
 
 module.exports = config;
