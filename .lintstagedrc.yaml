@@ -1,7 +1,4 @@
-'src/**/*.{ts,tsx}':
-  - eslint --fix
-  - prettier --write
-'test/**/*.{ts,tsx}':
+'{src,test,prisma}/**/*.{ts,tsx}':
   - eslint --fix
   - prettier --write
 '*.{js,cjs}':
