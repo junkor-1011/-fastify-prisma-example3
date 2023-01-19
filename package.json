@@ -20,6 +20,7 @@
     "lint": "eslint --ext .ts src/ test/",
     "lint:fix": "eslint --fix --ext .ts src/ test/",
     "format": "prettier --write src test ./*.{js,json,yaml,yml,md}",
+    "dependency-check": "dependency-cruise src",
     "dependency-graph": "scripts/gen_depgraph",
     "prepare": "husky install"
   },
