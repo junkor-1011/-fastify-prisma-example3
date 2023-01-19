@@ -16,7 +16,7 @@
     "unit": "jest --passWithNoTests",
     "typecheck": "tsc --noEmit",
     "test": "pnpm unit",
-    "test:integration": "jest -c jest.config-integration.js",
+    "test:integration": "jest -c jest.config-integration.js --runInBand",
     "lint": "eslint --ext .ts src/ test/",
     "lint:fix": "eslint --fix --ext .ts src/ test/",
     "format": "prettier --write src test ./*.{js,json,yaml,yml,md}",
