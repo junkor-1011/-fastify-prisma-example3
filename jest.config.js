@@ -1,6 +1,8 @@
+/** @type {import('jest').Config} */
 const configBase = require('./jest.config-base');
 
-module.exports = {
+/** @type {import('jest').Config} */
+const config = {
   ...configBase,
   collectCoverage: true,
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/dist/'],
@@ -9,3 +11,5 @@ module.exports = {
     // '<rootDir>/test/unit/**/*.(test|spec).ts',
   ],
 };
+
+module.exports = config;

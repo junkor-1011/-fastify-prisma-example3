@@ -1,4 +1,5 @@
-module.exports = {
+/** @type {import('jest').Config} */
+const config = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   // preset: 'ts-jest/presets/default-esm',
   // globals: {
@@ -43,3 +44,5 @@ module.exports = {
     // '^.+\\.module\\.(css|sass|scss)$',
   ],
 };
+
+module.exports = config;
