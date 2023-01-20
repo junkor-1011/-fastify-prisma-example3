@@ -37,6 +37,13 @@ export const createUserHandler = async (
       data: record,
     });
   } catch (err) {
+    if (err instanceof PrismaClientKnownRequestError) {
+      if (err.code === 'P2002') {
+        request.log.info(`constraint error, email: ${request.body?.email ?? ''}`);
+        reply.badRequest(`constraint error, email: ${request.body?.email ?? ''}`);
+        return;
+      }
+    }
     request.log.error(err);
     reply.internalServerError();
   }
@@ -95,7 +102,6 @@ export const deleteUserHandler = async (
       if (err.code === 'P2025') {
         reply.notFound(`id: ${request.params.id} was not found.`);
       }
-      return;
     }
     request.log.error(err);
     reply.internalServerError();
@@ -163,6 +169,13 @@ export const putUserHandler = async (
     });
     await reply.code(200).send(user);
   } catch (err) {
+    if (err instanceof PrismaClientKnownRequestError) {
+      if (err.code === 'P2002') {
+        request.log.info('constraint error');
+        reply.badRequest('constraint error');
+        return;
+      }
+    }
     request.log.error(err);
     reply.internalServerError();
   }
