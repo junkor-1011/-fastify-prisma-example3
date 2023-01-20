@@ -1,6 +1,7 @@
 import fastify, { FastifyInstance, FastifyServerOptions } from 'fastify';
 import swagger from '@fastify/swagger';
 import swaggerUI from '@fastify/swagger-ui';
+import fastifySensible from '@fastify/sensible';
 import fs from 'fs';
 import { JsonSchema, withRefResolver } from 'fastify-zod';
 import { userSchemas } from '@/modules/user/user.schema';
@@ -17,6 +18,8 @@ export const buildApp = async (opts: FastifyServerOptions = {}): Promise<Fastify
     },
     ...opts,
   });
+
+  await server.register(fastifySensible);
 
   const registerSchemas = (...schemasList: JsonSchema[][]): void => {
     schemasList.forEach((schemas) => {
