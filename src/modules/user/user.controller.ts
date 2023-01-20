@@ -37,10 +37,8 @@ export const createUserHandler = async (
       data: record,
     });
   } catch (err) {
-    console.log(err);
-    await reply.code(500).send({
-      message: 'Internal Server Error',
-    });
+    request.log.error(err);
+    reply.internalServerError();
   }
 
   await reply.code(201).send(record);
@@ -58,10 +56,8 @@ export const getUserHandler = async (
     });
     await reply.code(200).send(user);
   } catch (err) {
-    console.log(err);
-    await reply.code(500).send({
-      message: 'Internal Server Error',
-    });
+    request.log.error(err);
+    reply.internalServerError();
   }
 };
 
@@ -77,10 +73,8 @@ export const getUsersHandler = async (
     });
     await reply.code(200).send(users);
   } catch (err) {
-    console.log(err);
-    await reply.code(500).send({
-      message: 'Internal Server Error',
-    });
+    request.log.error(err);
+    reply.internalServerError();
   }
 };
 
@@ -135,9 +129,7 @@ export const patchUserHandler = async (
     await reply.code(200).send(user);
   } catch (err) {
     request.log.error(err);
-    await reply.code(500).send({
-      message: 'Internal Server Error',
-    });
+    reply.internalServerError();
   }
 };
 
@@ -171,9 +163,7 @@ export const putUserHandler = async (
     });
     await reply.code(200).send(user);
   } catch (err) {
-    console.log(err);
-    await reply.code(500).send({
-      message: 'Internal Server Error',
-    });
+    request.log.error(err);
+    reply.internalServerError();
   }
 };
