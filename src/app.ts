@@ -2,7 +2,7 @@ import fastify, { FastifyInstance, FastifyServerOptions } from 'fastify';
 import swagger from '@fastify/swagger';
 import swaggerUI from '@fastify/swagger-ui';
 import fs from 'fs';
-import { withRefResolver } from 'fastify-zod';
+import { JsonSchema, withRefResolver } from 'fastify-zod';
 import { userSchemas } from '@/modules/user/user.schema';
 import userRoutes from '@/modules/user/user.route';
 
@@ -17,9 +17,15 @@ export const buildApp = async (opts: FastifyServerOptions = {}): Promise<Fastify
     },
     ...opts,
   });
-  userSchemas.forEach((schema) => {
-    server.addSchema(schema);
-  });
+
+  const registerSchemas = (...schemasList: JsonSchema[][]): void => {
+    schemasList.forEach((schemas) => {
+      schemas.forEach((schema) => {
+        server.addSchema(schema);
+      });
+    });
+  };
+  registerSchemas(userSchemas);
   await server.register(
     swagger,
     withRefResolver({
