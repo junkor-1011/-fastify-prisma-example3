@@ -14,6 +14,7 @@ import {
   PutUserRequestBodyType,
   // UserType,
 } from './user.schema';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 
 export const createUserHandler = async (
   request: FastifyRequest<{ Body: UserInputType }>,
@@ -93,13 +94,17 @@ export const deleteUserHandler = async (
         id: request.params.id,
       },
     });
-    console.log('[INFO]user deleted: ', user);
+    request.log.info(`user deleted, id: ${user.id}`);
     await reply.code(204).send();
   } catch (err) {
-    console.log(err);
-    await reply.code(500).send({
-      message: 'Internal Server Error',
-    });
+    if (err instanceof PrismaClientKnownRequestError) {
+      if (err.code === 'P2025') {
+        reply.notFound(`id: ${request.params.id} was not found.`);
+      }
+      return;
+    }
+    request.log.error(err);
+    reply.internalServerError();
   }
 };
 
@@ -129,7 +134,7 @@ export const patchUserHandler = async (
     });
     await reply.code(200).send(user);
   } catch (err) {
-    console.log(err);
+    request.log.error(err);
     await reply.code(500).send({
       message: 'Internal Server Error',
     });
