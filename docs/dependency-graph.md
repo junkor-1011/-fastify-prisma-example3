@@ -4,30 +4,36 @@ flowchart LR
 subgraph 0["src"]
 1["app.ts"]
 subgraph 2["modules"]
-subgraph 3["user"]
-4["user.route.ts"]
-5["user.controller.ts"]
-6["user.schema.ts"]
+subgraph 3["_common"]
+4["error-responses.schema.ts"]
+end
+subgraph 9["user"]
+A["user.route.ts"]
+B["user.controller.ts"]
+C["user.schema.ts"]
 end
 end
-subgraph 7["libs"]
-8["openapiSpec.ts"]
-subgraph 9["utils"]
-A["object.ts"]
-C["object.test.ts"]
+subgraph 5["libs"]
+6["openapiSpec.ts"]
+subgraph 7["utils"]
+8["object.ts"]
+E["object.test.ts"]
 end
-B["prisma.ts"]
+D["prisma.ts"]
 end
-D["main.ts"]
+F["main.ts"]
 end
 1-->4
-1-->6
-4-->5
+1-->A
+1-->C
 4-->6
-5-->6
-5-->B
-6-->8
-6-->A
-C-->A
-D-->1
+4-->8
+A-->B
+A-->C
+B-->C
+B-->D
+C-->6
+C-->8
+E-->8
+F-->1
 ```
