@@ -281,6 +281,7 @@ paths:
     post:
       tags:
         - User
+      description: create user resource
       requestBody:
         content:
           application/json:
@@ -311,6 +312,7 @@ paths:
     get:
       tags:
         - User
+      description: get users information list
       parameters:
         - schema:
             type: number
@@ -337,10 +339,25 @@ paths:
               schema:
                 $ref: "#/components/schemas/userSchemas/properties/userListSchema"
                 description: users
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse/properties/schemaOf4xxErrorResponse"
+                description: Client Error
+        5XX:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse/properties/schemaOf5xxErrorResponse"
+                description: Server Error
   "/users/{id}":
     get:
       tags:
         - User
+      description: get user detail info
       parameters:
         - schema:
             $ref: "#/components/schemas/userSchemas/properties/userSchema/properties/id"
@@ -355,9 +372,24 @@ paths:
               schema:
                 $ref: "#/components/schemas/userSchemas/properties/userSchema"
                 description: user detail
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse/properties/schemaOf4xxErrorResponse"
+                description: Client Error
+        5XX:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse/properties/schemaOf5xxErrorResponse"
+                description: Server Error
     delete:
       tags:
         - User
+      description: delete user resource
       parameters:
         - schema:
             $ref: "#/components/schemas/userSchemas/properties/userSchema/properties/id"
@@ -367,9 +399,24 @@ paths:
       responses:
         "204":
           description: deleted user successfully
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse/properties/schemaOf4xxErrorResponse"
+                description: Client Error
+        5XX:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse/properties/schemaOf5xxErrorResponse"
+                description: Server Error
     patch:
       tags:
         - User
+      description: change user resource
       requestBody:
         content:
           application/json:
@@ -389,9 +436,24 @@ paths:
               schema:
                 $ref: "#/components/schemas/userSchemas/properties/userSchema"
                 description: user detail
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse/properties/schemaOf4xxErrorResponse"
+                description: Client Error
+        5XX:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse/properties/schemaOf5xxErrorResponse"
+                description: Server Error
     put:
       tags:
         - User
+      description: create or update user
       requestBody:
         content:
           application/json:
@@ -413,3 +475,17 @@ paths:
               schema:
                 $ref: "#/components/schemas/userSchemas/properties/userSchema"
                 description: user detail
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse/properties/schemaOf4xxErrorResponse"
+                description: Client Error
+        5XX:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse/properties/schemaOf5xxErrorResponse"
+                description: Server Error

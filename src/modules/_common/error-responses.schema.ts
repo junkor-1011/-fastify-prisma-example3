@@ -58,3 +58,8 @@ const schemaExamples = {
 };
 
 bindExamples(errorResponseSchemas, schemaExamples);
+
+export const errorResponseJsonSchemaBase = {
+  '4xx': { ...$ref('schemaOf4xxErrorResponse'), description: 'Client Error' },
+  '5xx': { ...$ref('schemaOf5xxErrorResponse'), description: 'Server Error' },
+} as const;
