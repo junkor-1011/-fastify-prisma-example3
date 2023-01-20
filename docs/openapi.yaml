@@ -294,6 +294,20 @@ paths:
               schema:
                 $ref: "#/components/schemas/userSchemas/properties/userSchema"
                 description: user was created
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse/properties/schemaOf4xxErrorResponse"
+                description: Client Error
+        5XX:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse/properties/schemaOf5xxErrorResponse"
+                description: Server Error
     get:
       tags:
         - User

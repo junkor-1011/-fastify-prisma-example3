@@ -9,6 +9,7 @@ import {
   patchUserHandler,
   putUserHandler,
 } from './user.controller';
+import { $ref as $refErrorResponse } from '@/modules/_common/error-responses.schema';
 import { $ref } from './user.schema';
 
 const userRoutes = async (server: FastifyInstance): Promise<void> => {
@@ -17,6 +18,8 @@ const userRoutes = async (server: FastifyInstance): Promise<void> => {
       body: $ref('userInputSchema'),
       response: {
         201: { ...$ref('userSchema'), description: 'user was created' },
+        '4xx': { ...$refErrorResponse('schemaOf4xxErrorResponse'), description: 'Client Error' },
+        '5xx': { ...$refErrorResponse('schemaOf5xxErrorResponse'), description: 'Server Error' },
       },
       tags: ['User'],
     },
