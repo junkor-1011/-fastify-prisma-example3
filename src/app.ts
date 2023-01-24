@@ -4,7 +4,6 @@ import swaggerUI from '@fastify/swagger-ui';
 import fastifySensible from '@fastify/sensible';
 import fs from 'fs';
 import { JsonSchema, withRefResolver } from 'fastify-zod';
-import { headerForAuthSchemas } from '@/modules/_common/auth.schema';
 import { errorResponseSchemas } from '@/modules/_common/error-responses.schema';
 import { userSchemas } from '@/modules/user/user.schema';
 import userRoutes from '@/modules/user/user.route';
@@ -30,7 +29,7 @@ export const buildApp = async (opts: FastifyServerOptions = {}): Promise<Fastify
       });
     });
   };
-  registerSchemas(headerForAuthSchemas, errorResponseSchemas, userSchemas);
+  registerSchemas(errorResponseSchemas, userSchemas);
   await server.register(
     swagger,
     withRefResolver({

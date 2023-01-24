@@ -11,13 +11,11 @@ import {
 } from './user.controller';
 import { errorResponseJsonSchemaBase } from '@/modules/_common/error-responses.schema';
 import { $ref } from './user.schema';
-import { $ref as $headerRef } from '@/modules/_common/auth.schema';
 
 const userRoutes = async (server: FastifyInstance): Promise<void> => {
   server.post('/', {
     schema: {
       description: 'create user resource',
-      headers: $headerRef('schemaOfReqestHeaderForAuth'),
       body: $ref('userInputSchema'),
       response: {
         201: { ...$ref('userSchema'), description: 'user was created' },
@@ -57,7 +55,6 @@ const userRoutes = async (server: FastifyInstance): Promise<void> => {
   server.delete('/:id', {
     schema: {
       description: 'delete user resource',
-      headers: $headerRef('schemaOfReqestHeaderForAuth'),
       params: $ref('deleteUserParamsSchema'),
       response: {
         204: {
@@ -73,7 +70,6 @@ const userRoutes = async (server: FastifyInstance): Promise<void> => {
   server.patch('/:id', {
     schema: {
       description: 'change user resource',
-      headers: $headerRef('schemaOfReqestHeaderForAuth'),
       params: $ref('patchUserParamsSchema'),
       body: $ref('patchUserRequestBodySchema'),
       response: {
@@ -90,7 +86,6 @@ const userRoutes = async (server: FastifyInstance): Promise<void> => {
   server.put('/:id', {
     schema: {
       description: 'create or update user',
-      headers: $headerRef('schemaOfReqestHeaderForAuth'),
       params: $ref('putUserParamsSchema'),
       body: $ref('putUserRequestBodySchema'),
       response: {
