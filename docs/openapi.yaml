@@ -5,6 +5,24 @@ info:
   version: 0.0.1
 components:
   schemas:
+    headers:
+      type: object
+      properties:
+        schemaOfReqestHeaderForAuth:
+          type: object
+          properties:
+            Authorization:
+              type: string
+              minLength: 1
+              description: token
+          required:
+            - Authorization
+          additionalProperties: false
+          example:
+            Authorization: hogefugafoo
+      required:
+        - schemaOfReqestHeaderForAuth
+      additionalProperties: false
     ErrorResponse:
       type: object
       properties:
@@ -287,6 +305,14 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/userSchemas/properties/userInputSchema"
+      parameters:
+        - schema:
+            type: string
+            minLength: 1
+          in: header
+          name: Authorization
+          required: true
+          description: token
       responses:
         "201":
           description: user was created
@@ -396,6 +422,13 @@ paths:
           in: path
           name: id
           required: true
+        - schema:
+            type: string
+            minLength: 1
+          in: header
+          name: Authorization
+          required: true
+          description: token
       responses:
         "204":
           description: deleted user successfully
@@ -428,6 +461,13 @@ paths:
           in: path
           name: id
           required: true
+        - schema:
+            type: string
+            minLength: 1
+          in: header
+          name: Authorization
+          required: true
+          description: token
       responses:
         "200":
           description: user detail
@@ -467,6 +507,13 @@ paths:
           name: id
           required: true
           description: id of the user
+        - schema:
+            type: string
+            minLength: 1
+          in: header
+          name: Authorization
+          required: true
+          description: token
       responses:
         "200":
           description: user detail

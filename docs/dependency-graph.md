@@ -5,36 +5,40 @@ subgraph 0["src"]
 1["app.ts"]
 subgraph 2["modules"]
 subgraph 3["_common"]
-4["error-responses.schema.ts"]
+4["auth.schema.ts"]
+7["error-responses.schema.ts"]
 end
-subgraph 9["user"]
-A["user.route.ts"]
-B["user.controller.ts"]
-C["user.schema.ts"]
+subgraph A["user"]
+B["user.route.ts"]
+C["user.controller.ts"]
+D["user.schema.ts"]
 end
 end
 subgraph 5["libs"]
 6["openapiSpec.ts"]
-subgraph 7["utils"]
-8["object.ts"]
-E["object.test.ts"]
+subgraph 8["utils"]
+9["object.ts"]
+F["object.test.ts"]
 end
-D["prisma.ts"]
+E["prisma.ts"]
 end
-F["main.ts"]
+G["main.ts"]
 end
 1-->4
-1-->A
-1-->C
+1-->7
+1-->B
+1-->D
 4-->6
-4-->8
-A-->B
-A-->C
-A-->4
+7-->6
+7-->9
 B-->C
 B-->D
-C-->6
-C-->8
-E-->8
-F-->1
+B-->4
+B-->7
+C-->D
+C-->E
+D-->6
+D-->9
+F-->9
+G-->1
 ```
