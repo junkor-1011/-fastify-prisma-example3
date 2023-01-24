@@ -6,6 +6,9 @@ subgraph 0["src"]
 subgraph 2["modules"]
 subgraph 3["_common"]
 4["error-responses.schema.ts"]
+subgraph E["schemas"]
+F["auth.ts"]
+end
 end
 subgraph 9["user"]
 A["user.route.ts"]
@@ -17,11 +20,11 @@ subgraph 5["libs"]
 6["openapiSpec.ts"]
 subgraph 7["utils"]
 8["object.ts"]
-E["object.test.ts"]
+G["object.test.ts"]
 end
 D["prisma.ts"]
 end
-F["main.ts"]
+H["main.ts"]
 end
 1-->4
 1-->A
@@ -33,8 +36,9 @@ A-->C
 A-->4
 B-->C
 B-->D
+B-->F
 C-->6
 C-->8
-E-->8
-F-->1
+G-->8
+H-->1
 ```
