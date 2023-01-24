@@ -1,9 +1,9 @@
-import fastify, { FastifyInstance, FastifyServerOptions } from 'fastify';
+import fastify, { type FastifyInstance, type FastifyServerOptions } from 'fastify';
 import swagger from '@fastify/swagger';
 import swaggerUI from '@fastify/swagger-ui';
 import fastifySensible from '@fastify/sensible';
 import fs from 'fs';
-import { JsonSchema, withRefResolver } from 'fastify-zod';
+import { type JsonSchema, withRefResolver } from 'fastify-zod';
 import { errorResponseSchemas } from '@/modules/_common/error-responses.schema';
 import { userSchemas } from '@/modules/user/user.schema';
 import userRoutes from '@/modules/user/user.route';
@@ -38,6 +38,15 @@ export const buildApp = async (opts: FastifyServerOptions = {}): Promise<Fastify
           title: 'Fastify Example',
           description: 'fastify zod example',
           version: '0.0.1',
+        },
+        components: {
+          securitySchemes: {
+            apiKey: {
+              type: 'apiKey',
+              name: 'Authorization',
+              in: 'header',
+            },
+          },
         },
       },
     }),

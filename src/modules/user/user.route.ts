@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/require-await */
 
-import { FastifyInstance } from 'fastify';
+import { type FastifyInstance } from 'fastify';
 import {
   createUserHandler,
   deleteUserHandler,
@@ -16,6 +16,7 @@ const userRoutes = async (server: FastifyInstance): Promise<void> => {
   server.post('/', {
     schema: {
       description: 'create user resource',
+      security: [{ apiKey: [] }],
       body: $ref('userInputSchema'),
       response: {
         201: { ...$ref('userSchema'), description: 'user was created' },
@@ -55,6 +56,7 @@ const userRoutes = async (server: FastifyInstance): Promise<void> => {
   server.delete('/:id', {
     schema: {
       description: 'delete user resource',
+      security: [{ apiKey: [] }],
       params: $ref('deleteUserParamsSchema'),
       response: {
         204: {
@@ -70,6 +72,7 @@ const userRoutes = async (server: FastifyInstance): Promise<void> => {
   server.patch('/:id', {
     schema: {
       description: 'change user resource',
+      security: [{ apiKey: [] }],
       params: $ref('patchUserParamsSchema'),
       body: $ref('patchUserRequestBodySchema'),
       response: {
@@ -86,6 +89,7 @@ const userRoutes = async (server: FastifyInstance): Promise<void> => {
   server.put('/:id', {
     schema: {
       description: 'create or update user',
+      security: [{ apiKey: [] }],
       params: $ref('putUserParamsSchema'),
       body: $ref('putUserRequestBodySchema'),
       response: {

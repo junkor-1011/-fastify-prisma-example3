@@ -4,6 +4,11 @@ info:
   description: fastify zod example
   version: 0.0.1
 components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: Authorization
+      in: header
   schemas:
     ErrorResponse:
       type: object
@@ -287,6 +292,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/userSchemas/properties/userInputSchema"
+      security:
+        - apiKey: []
       responses:
         "201":
           description: user was created
@@ -396,6 +403,8 @@ paths:
           in: path
           name: id
           required: true
+      security:
+        - apiKey: []
       responses:
         "204":
           description: deleted user successfully
@@ -428,6 +437,8 @@ paths:
           in: path
           name: id
           required: true
+      security:
+        - apiKey: []
       responses:
         "200":
           description: user detail
@@ -467,6 +478,8 @@ paths:
           name: id
           required: true
           description: id of the user
+      security:
+        - apiKey: []
       responses:
         "200":
           description: user detail
