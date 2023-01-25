@@ -22,6 +22,7 @@
     "format": "prettier --write src test prisma ./*.{js,json,yaml,yml,md}",
     "dependency-check": "dependency-cruise src",
     "dependency-graph": "scripts/gen_depgraph",
+    "docs:openapi": "tsx scripts/genOpenapiYaml.ts",
     "prepare": "husky install"
   },
   "keywords": [],
