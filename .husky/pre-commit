@@ -2,5 +2,6 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 pnpm dependency-graph && git add docs/dependency-graph.md
+pnpm docs:openapi && git add docs/openapi.yaml
 pnpm lint-staged
 pnpm test
