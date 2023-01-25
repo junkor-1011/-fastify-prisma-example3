@@ -7,10 +7,31 @@ import { type JsonSchema, withRefResolver } from 'fastify-zod';
 import { errorResponseSchemas } from '@/modules/_common/error-responses.schema';
 import { userSchemas } from '@/modules/user/user.schema';
 import userRoutes from '@/modules/user/user.route';
+import { type PinoLoggerOptions } from 'fastify/types/logger';
 
 export const buildApp = async (opts: FastifyServerOptions = {}): Promise<FastifyInstance> => {
+  const genLoggerOption = (): PinoLoggerOptions | boolean => {
+    const { STAGE } = process.env;
+    if (STAGE === 'LOCAL' || STAGE === 'DEBUG') {
+      const opts = {
+        transport: {
+          target: 'pino-pretty', // TODO: may not be used in production environment because of performance
+          options: {
+            translateTime: "UTC:yyyy-mm-dd'T'HH:MM:ss'Z'",
+            colorlize: true,
+          },
+        },
+      } as const satisfies PinoLoggerOptions;
+      return opts;
+    }
+    if (STAGE === 'TEST') {
+      return false;
+    }
+    // default
+    return true;
+  };
   const server = fastify({
-    logger: true,
+    logger: genLoggerOption(),
     ajv: {
       customOptions: {
         strict: 'log',
@@ -62,7 +83,7 @@ export const buildApp = async (opts: FastifyServerOptions = {}): Promise<Fastify
 export const app = async (): Promise<void> => {
   const server = await buildApp();
 
-  const swaggerFlg: boolean = process.env.STAGE !== 'PRODUCTION';
+  const swaggerFlg: boolean = process.env.STAGE === 'LOCAL';
   if (swaggerFlg) {
     await server.register(swaggerUI, {
       routePrefix: '/docs',
