@@ -762,8 +762,8 @@ packages:
       vary: 1.1.2
     dev: false
 
-  /@fastify/static/6.6.1:
-    resolution: {integrity: sha512-sylhlmhclqwkyZy/SD5wzd4yjmMuqW8cRmfnuPXPhftZuEwJ8G2apm0kECQRnHJnk+W3Ksx2fpIHHcthzxNRTA==}
+  /@fastify/static/6.7.0:
+    resolution: {integrity: sha512-GYFDTSK83OL3mlzEDhgZXwFqPpGPiOsOr+dx63y2hcDF+NF4j1Ps2Swvmq/tMc5CFGoEDhkVN+P9fWG+/4a30Q==}
     dependencies:
       '@fastify/accept-negotiator': 1.1.0
       '@fastify/send': 1.0.0
@@ -779,7 +779,7 @@ packages:
   /@fastify/swagger-ui/1.3.0:
     resolution: {integrity: sha512-Q6vvIyTd1gj0h0IoDAAUX3SBBiL1pybXP0FmFbD4yLMcACIZ7xm8oHCf5lMc3rNC69KhbywuSst3iHgp23x8SA==}
     dependencies:
-      '@fastify/static': 6.6.1
+      '@fastify/static': 6.7.0
       fastify-plugin: 4.5.0
       openapi-types: 12.1.0
       rfdc: 1.3.0
@@ -791,7 +791,7 @@ packages:
   /@fastify/swagger/7.6.1:
     resolution: {integrity: sha512-fpwblS7aOfnVymdRyKI3Zw/ZNt2u0oGm7KQgQ/itmd4Hlh/LKNNoWg6R/+eLa9H/4JTd34ZRRC3mNKhkVl5Kdw==}
     dependencies:
-      '@fastify/static': 6.6.1
+      '@fastify/static': 6.7.0
       fastify-plugin: 4.5.0
       json-schema-resolver: 2.0.0
       openapi-types: 12.1.0
@@ -1148,7 +1148,7 @@ packages:
     dependencies:
       chalk: 5.2.0
       commander: 9.5.0
-      puppeteer: 19.6.0
+      puppeteer: 19.6.1
     transitivePeerDependencies:
       - bufferutil
       - encoding
@@ -5940,8 +5940,8 @@ packages:
     resolution: {integrity: sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==}
     engines: {node: '>=6'}
 
-  /puppeteer-core/19.6.0:
-    resolution: {integrity: sha512-GvqWdHr9eY/MFR5pXf9o0apnrTmG0hhS7/TtCPfeAvCbaUS1bsLMZWxNGvI/QbviRu4xxi6HrR7VW4x/4esq1Q==}
+  /puppeteer-core/19.6.1:
+    resolution: {integrity: sha512-TdbqPYGHRgaqO1XPOM5ThE7uSs5NsYraOUU546okJz7jR9He5wnGuFd6LppoeWt8a4eM5RgzmICxeDUD5QwQtA==}
     engines: {node: '>=14.1.0'}
     dependencies:
       cross-fetch: 3.1.5
@@ -5961,8 +5961,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /puppeteer/19.6.0:
-    resolution: {integrity: sha512-KpRjn/bosTWe8xOQ/F5J1UmQ4inR77ADddn8G6MqMPp/y9Tl+7EycXgrjO0/3i/OQfHi5bsvkTKXRkm0ieo/ew==}
+  /puppeteer/19.6.1:
+    resolution: {integrity: sha512-gcqNilThyBPrUMvo2UZNG4KVoMjhCfCV7/84mTVk3oo0k65iO7hEKrB4waiJ15O0MHQpM79+XBHavRgBbRXUWQ==}
     engines: {node: '>=14.1.0'}
     requiresBuild: true
     dependencies:
@@ -5970,7 +5970,7 @@ packages:
       https-proxy-agent: 5.0.1
       progress: 2.0.3
       proxy-from-env: 1.1.0
-      puppeteer-core: 19.6.0
+      puppeteer-core: 19.6.1
     transitivePeerDependencies:
       - bufferutil
       - encoding
