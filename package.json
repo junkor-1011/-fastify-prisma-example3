@@ -16,7 +16,7 @@
     "unit": "jest --passWithNoTests",
     "typecheck": "tsc --noEmit",
     "test": "NODE_OPTIONS='--experimental-vm-modules' pnpm unit",
-    "test:integration": "jest -c jest.config-integration.cjs --runInBand",
+    "test:integration": "NODE_OPTIONS='--experimental-vm-modules' jest -c jest.config-integration.cjs --runInBand",
     "lint": "eslint --ext .ts src/ test/ prisma/",
     "lint:fix": "eslint --fix --ext .ts src/ test/ prisma/",
     "format": "prettier --write src test prisma ./*.{js,json,yaml,yml,md}",
