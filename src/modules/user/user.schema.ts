@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { buildJsonSchemas } from 'fastify-zod';
 
-import { bindExamples } from '@/libs/openapiSpec';
-import { pickObject, omitObject } from '@/libs/utils/object';
+import { bindExamples } from '@/libs/openapiSpec.js';
+import { pickObject, omitObject } from '@/libs/utils/object.js';
 
 export const userBase = {
   id: z.string().uuid().describe('user id'),

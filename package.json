@@ -2,6 +2,7 @@
   "name": "fastify-prisma-example",
   "version": "0.0.1",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "packageManager": "pnpm@7.26.2",
   "scripts": {
@@ -15,7 +16,7 @@
     "unit": "jest --passWithNoTests",
     "typecheck": "tsc --noEmit",
     "test": "pnpm unit",
-    "test:integration": "jest -c jest.config-integration.js --runInBand",
+    "test:integration": "jest -c jest.config-integration.cjs --runInBand",
     "lint": "eslint --ext .ts src/ test/ prisma/",
     "lint:fix": "eslint --fix --ext .ts src/ test/ prisma/",
     "format": "prettier --write src test prisma ./*.{js,json,yaml,yml,md}",
@@ -50,6 +51,7 @@
     "prettier": "^2.8.3",
     "prisma": "^4.9.0",
     "prisma-erd-generator": "^1.2.5",
+    "ts-jest-resolver": "^2.0.0",
     "tsx": "^3.12.2",
     "typescript": "~4.9.5"
   },

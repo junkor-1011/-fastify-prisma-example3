@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { buildApp } from '@/app';
+import { buildApp } from '@/app.js';
 
 const prisma = new PrismaClient({
   log: ['warn', 'error'],

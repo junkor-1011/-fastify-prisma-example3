@@ -1,14 +1,15 @@
 /** @type {import('jest').Config} */
 const config = {
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  resolver: 'ts-jest-resolver',
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.cjs'],
   // preset: 'ts-jest/presets/default-esm',
   // globals: {
   //   '@swc/jest': {
   //     tsconfig: '<rootDir>/tsconfig.json',
   //   },
   // },
-  globalSetup: './jest.global-setup.js',
-  moduleFileExtensions: ['js', 'ts', 'json'],
+  globalSetup: './jest.global-setup.cjs',
+  moduleFileExtensions: ['js', 'cjs', 'ts', 'json'],
   moduleNameMapper: {
     '^@/(.+)': '<rootDir>/src/$1',
 

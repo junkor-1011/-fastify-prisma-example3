@@ -1,4 +1,4 @@
-import { pickObject, omitObject } from './object';
+import { pickObject, omitObject } from './object.js';
 
 const baseObject = {
   a: 1,
