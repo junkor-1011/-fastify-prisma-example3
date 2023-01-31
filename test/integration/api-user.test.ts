@@ -36,7 +36,7 @@ const userTestData = [
 ];
 
 beforeAll(async () => {
-  jest.useRealTimers();
+  // jest.useRealTimers();
   await prisma.$transaction([prisma.user.deleteMany()]);
 });
 
@@ -45,7 +45,7 @@ afterAll(async () => {
 });
 
 beforeEach(async () => {
-  jest.useRealTimers(); // to avoid fastify.inject stopping
+  // jest.useRealTimers(); // to avoid fastify.inject stopping
   await prisma.$transaction([prisma.user.createMany({ data: userTestData })]);
 }, 5000);
 
@@ -55,7 +55,7 @@ afterEach(async () => {
 
 describe('GET /users', () => {
   it('get records', async () => {
-    jest.useRealTimers();
+    // jest.useRealTimers();
     const app = await buildApp();
     const response = await app.inject('/users');
     // smoke test
