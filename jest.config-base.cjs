@@ -1,6 +1,8 @@
 /** @type {import('jest').Config} */
 const config = {
+  preset: 'ts-jest/presets/default-esm',
   resolver: 'ts-jest-resolver',
+  extensionsToTreatAsEsm: ['.ts'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.cjs'],
   // preset: 'ts-jest/presets/default-esm',
   // globals: {
@@ -12,30 +14,21 @@ const config = {
   moduleFileExtensions: ['js', 'cjs', 'ts', 'json'],
   moduleNameMapper: {
     '^@/(.+)': '<rootDir>/src/$1',
-
+    '^(\\.{1,2}/.*)\\.js$': '$1',
     // '^axios$': require.resolve('axios'),
   },
   // testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/dist/'],
   // testEnvironment: 'jest-environment-jsdom',
   transform: {
     '^.+\\.(t|j)sx?$': [
-      'esbuild-jest',
+      // 'esbuild-jest',
+      // {
+      //   sourceMaps: true,
+      //   format: 'esm',
+      // },
+      'ts-jest',
       {
-        sourceMaps: true,
-        module: {
-          type: 'commonjs',
-        },
-        jsc: {
-          parser: {
-            syntax: 'typescript',
-            tsx: true,
-          },
-          // transform: {
-          //   react: {
-          //     runtime: 'automatic',
-          //   },
-          // },
-        },
+        useESM: true,
       },
     ],
     // '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
