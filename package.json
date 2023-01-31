@@ -5,10 +5,10 @@
   "main": "index.js",
   "packageManager": "pnpm@7.26.2",
   "scripts": {
-    "build": "esbuild src/main.ts --outdir=dist --platform=node --minify --bundle --tsconfig=tsconfig-prod.json",
+    "build": "esbuild src/main.ts --outdir=dist --platform=node --minify --bundle --tsconfig=tsconfig-prod.json --format=esm --out-extension:.js=.mjs --banner:js='import { createRequire as topLevelCreateRequire } from \"module\"; import url from \"url\"; const require = topLevelCreateRequire(import.meta.url); const __filename = url.fileURLToPath(import.meta.url); const __dirname = url.fileURLToPath(new URL(\".\", import.meta.url));'",
     "dev:tsnd": "tsnd --respawn --transpile-only --exit-child -r tsconfig-paths/register --project tsconfig-dev.json src/main.ts",
     "dev": "tsx watch src/main.ts",
-    "start": "dotenv -e .env.production.default -e .env.production node dist/main.js",
+    "start": "dotenv -e .env.production.default -e .env.production node dist/main.mjs",
     "generate": "prisma generate",
     "cleanup": "tsx prisma/cleanup.ts",
     "seed": "tsx prisma/seed.ts",
