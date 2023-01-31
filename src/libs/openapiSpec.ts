@@ -1,4 +1,4 @@
-import { JsonSchema } from 'fastify-zod';
+import { type JsonSchema } from 'fastify-zod';
 
 export type JsonSchemaExtended = JsonSchema & {
   properties?: Record<
