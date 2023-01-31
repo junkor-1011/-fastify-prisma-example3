@@ -6,7 +6,6 @@
   "packageManager": "pnpm@7.26.2",
   "scripts": {
     "build": "esbuild src/main.ts --outdir=dist --platform=node --minify --bundle --tsconfig=tsconfig-prod.json --format=esm --out-extension:.js=.mjs --banner:js='import { createRequire as topLevelCreateRequire } from \"module\"; import url from \"url\"; const require = topLevelCreateRequire(import.meta.url); const __filename = url.fileURLToPath(import.meta.url); const __dirname = url.fileURLToPath(new URL(\".\", import.meta.url));'",
-    "dev:tsnd": "tsnd --respawn --transpile-only --exit-child -r tsconfig-paths/register --project tsconfig-dev.json src/main.ts",
     "dev": "tsx watch src/main.ts",
     "start": "dotenv -e .env.production.default -e .env.production node dist/main.mjs",
     "generate": "prisma generate",
@@ -51,8 +50,6 @@
     "prettier": "^2.8.3",
     "prisma": "^4.9.0",
     "prisma-erd-generator": "^1.2.5",
-    "ts-node-dev": "^2.0.0",
-    "tsconfig-paths": "^4.1.2",
     "tsx": "^3.12.2",
     "typescript": "~4.9.5"
   },
