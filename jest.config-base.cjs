@@ -1,7 +1,8 @@
 /** @type {import('jest').Config} */
 const config = {
-  preset: 'ts-jest/presets/default-esm',
+  preset: 'ts-jest/presets/js-with-ts-esm',
   resolver: 'ts-jest-resolver',
+  testEnvironment: 'node',
   extensionsToTreatAsEsm: ['.ts'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.cjs'],
   // preset: 'ts-jest/presets/default-esm',
