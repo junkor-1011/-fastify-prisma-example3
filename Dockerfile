@@ -36,4 +36,4 @@ ENV STAGE=PRODUCTION
 WORKDIR /app
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
-CMD ["node", "main.js"]
+CMD ["node", "main.mjs"]
