@@ -9,6 +9,7 @@ USER node
 WORKDIR /app
 RUN find -type f -regextype sed -regex ".*\.\(test\|spec\|stories\)\.\(ts\|tsx\)" -delete && \
     find -type f -regextype sed -regex ".*\.snap" -delete
+ENV DISABLE_ERD=true
 RUN pnpm install --frozen-lockfile --ignore-scripts && \
     pnpm prisma generate && \
     pnpm build && \
