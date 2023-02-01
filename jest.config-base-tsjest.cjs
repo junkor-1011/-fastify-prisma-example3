@@ -4,6 +4,7 @@ const config = {
   testEnvironment: 'node',
   extensionsToTreatAsEsm: ['.ts'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.cjs'],
+  preset: 'ts-jest/presets/default-esm',
   globalSetup: './jest.global-setup.cjs',
   moduleFileExtensions: ['js', 'cjs', 'ts', 'json'],
   moduleNameMapper: {
@@ -12,16 +13,15 @@ const config = {
   },
   transform: {
     '^.+\\.(t|j)sx?$': [
-      'esbuild-jest',
-      {
-        sourceMaps: true,
-        format: 'esm',
-        target: 'es2022',
-      },
-      // 'ts-jest',
+      // 'esbuild-jest',
       // {
-      //   useESM: true,
+      //   sourceMaps: true,
+      //   format: 'esm',
       // },
+      'ts-jest',
+      {
+        useESM: true,
+      },
     ],
   },
   transformIgnorePatterns: ['/node_modules/'],
