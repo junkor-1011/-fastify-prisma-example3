@@ -1,25 +1,16 @@
 /** @type {import('jest').Config} */
 const config = {
-  preset: 'ts-jest/presets/js-with-ts-esm',
   resolver: 'ts-jest-resolver',
   testEnvironment: 'node',
   extensionsToTreatAsEsm: ['.ts'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.cjs'],
-  // preset: 'ts-jest/presets/default-esm',
-  // globals: {
-  //   '@swc/jest': {
-  //     tsconfig: '<rootDir>/tsconfig.json',
-  //   },
-  // },
+  preset: 'ts-jest/presets/default-esm',
   globalSetup: './jest.global-setup.cjs',
   moduleFileExtensions: ['js', 'cjs', 'ts', 'json'],
   moduleNameMapper: {
     '^@/(.+)': '<rootDir>/src/$1',
-    '^(\\.{1,2}/.*)\\.js$': '$1',
-    // '^axios$': require.resolve('axios'),
+    // '^(\\.{1,2}/.*)\\.js$': '$1',
   },
-  // testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/dist/'],
-  // testEnvironment: 'jest-environment-jsdom',
   transform: {
     '^.+\\.(t|j)sx?$': [
       // 'esbuild-jest',
@@ -32,12 +23,8 @@ const config = {
         useESM: true,
       },
     ],
-    // '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
   },
-  transformIgnorePatterns: [
-    '/node_modules/',
-    // '^.+\\.module\\.(css|sass|scss)$',
-  ],
+  transformIgnorePatterns: ['/node_modules/'],
   verbose: true,
 };
 
