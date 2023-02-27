@@ -1,7 +1,7 @@
-import { jest } from '@jest/globals';
-
 import { PrismaClient } from '@prisma/client';
 import { buildApp } from '@/app.js';
+
+const jest = import.meta.jest;
 
 const prisma = new PrismaClient({
   log: ['warn', 'error'],
@@ -37,13 +37,10 @@ const userTestData = [
   },
 ];
 
-beforeAll(async () => {
-  jest.useRealTimers();
-  await prisma.$transaction([prisma.user.deleteMany()]);
-});
+const server = await buildApp();
 
-afterAll(async () => {
-  await prisma.$disconnect();
+beforeAll(async () => {
+  await prisma.$transaction([prisma.user.deleteMany()]);
 });
 
 beforeEach(async () => {
@@ -55,11 +52,15 @@ afterEach(async () => {
   await prisma.$transaction([prisma.user.deleteMany()]);
 }, 5000);
 
+afterAll(async () => {
+  await prisma.$disconnect();
+  await server.close();
+});
+
 describe('GET /users', () => {
   it('get records', async () => {
     jest.useRealTimers();
-    const app = await buildApp();
-    const response = await app.inject('/users');
+    const response = await server.inject('/users');
     // smoke test
     expect(response.statusCode).toBe(200);
     // check record
