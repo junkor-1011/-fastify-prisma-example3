@@ -255,11 +255,14 @@ components:
             name:
               $ref: "#/components/schemas/userSchemas/properties/userInputSchema/properties/n\
                 ame"
+              description: user name
             email:
               $ref: "#/components/schemas/userSchemas/properties/userInputSchema/properties/e\
                 mail"
+              description: user's email address
             rank:
               $ref: "#/components/schemas/userSchemas/properties/userSchema/properties/rank"
+              description: the rank of user
           additionalProperties: false
         deleteUserParamsSchema:
           type: object
