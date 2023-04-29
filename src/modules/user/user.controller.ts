@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 import type { FastifyReply, FastifyRequest } from 'fastify';
 
-import { prisma } from '@/libs/prisma.js';
-import type { TAuthorizationHeaderObject } from '@/modules/_common/schemas/auth.js';
+import { prisma } from '@/libs/prisma';
+import type { TAuthorizationHeaderObject } from '@/modules/_common/schemas/auth';
 import type {
   // userInputSchema,
   // userSchema,
@@ -14,7 +14,7 @@ import type {
   PutUserParamsType,
   PutUserRequestBodyType,
   // UserType,
-} from './user.schema.js';
+} from './user.schema';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 
 export const createUserHandler = async (

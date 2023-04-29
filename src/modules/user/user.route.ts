@@ -8,9 +8,9 @@ import {
   getUsersHandler,
   patchUserHandler,
   putUserHandler,
-} from './user.controller.js';
-import { errorResponseJsonSchemaBase } from '@/modules/_common/error-responses.schema.js';
-import { $ref } from './user.schema.js';
+} from './user.controller';
+import { errorResponseJsonSchemaBase } from '@/modules/_common/error-responses.schema';
+import { $ref } from './user.schema';
 
 const userRoutes = async (server: FastifyInstance): Promise<void> => {
   server.post('/', {

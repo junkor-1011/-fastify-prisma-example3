@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es2022",
     "lib": ["esnext"],
     "module": "es2022",
-    "moduleResolution": "nodenext",
+    "moduleResolution": "bundler",
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]

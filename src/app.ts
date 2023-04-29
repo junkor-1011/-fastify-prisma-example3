@@ -4,10 +4,10 @@ import swaggerUI from '@fastify/swagger-ui';
 import fastifySensible from '@fastify/sensible';
 import fs from 'fs';
 import { type JsonSchema, withRefResolver } from 'fastify-zod';
-import { errorResponseSchemas } from '@/modules/_common/error-responses.schema.js';
-import { userSchemas } from '@/modules/user/user.schema.js';
-import userRoutes from '@/modules/user/user.route.js';
-import { type PinoLoggerOptions } from 'fastify/types/logger.js';
+import { errorResponseSchemas } from '@/modules/_common/error-responses.schema';
+import { userSchemas } from '@/modules/user/user.schema';
+import userRoutes from '@/modules/user/user.route';
+import { type PinoLoggerOptions } from 'fastify/types/logger';
 
 export const buildApp = async (opts: FastifyServerOptions = {}): Promise<FastifyInstance> => {
   const genLoggerOption = (): PinoLoggerOptions | boolean => {

@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { buildApp } from '@/app.js';
+import { buildApp } from '@/app';
 
 const jest = import.meta.jest;
 

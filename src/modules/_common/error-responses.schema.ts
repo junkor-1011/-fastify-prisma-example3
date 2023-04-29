@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { buildJsonSchemas } from 'fastify-zod';
 
-import { bindExamples } from '@/libs/openapiSpec.js';
-import { omitObject } from '@/libs/utils/object.js';
+import { bindExamples } from '@/libs/openapiSpec';
+import { omitObject } from '@/libs/utils/object';
 
 export const errorResponseBase = {
   statusCode: z.number().min(400).max(599).describe('http error status code'),
